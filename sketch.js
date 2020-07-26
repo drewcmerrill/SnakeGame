@@ -1,11 +1,14 @@
-let s = 2;
-let dimension = 20;
+let s;
+let dimension;
 var food;
 function setup()
 {
-	createCanvas(600, 600);
+	createCanvas(600,600);
+	dimension = width/10;
+	s = dimension/10;
 	snake = new Snake();
 	food = new Food();
+
 
 }
 
