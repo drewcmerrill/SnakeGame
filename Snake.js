@@ -38,6 +38,14 @@ class Snake
 
   }
 
+  eat()
+  {
+    if(head.x == food.x && head.y == food.y)
+    {
+
+    }
+  }
+
   update()
   {
     if(this.movementX)

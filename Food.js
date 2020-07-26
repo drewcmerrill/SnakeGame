@@ -11,6 +11,9 @@ class Food
 
   show()
   {
+    push();
+    fill(this.r, this.g, this.b);
     rect(this.x, this.y, dimension, dimension);
+    pop();
   }
 }
