@@ -3,9 +3,11 @@ class Snake
   constructor(x,y)
   {
     this.head = new Segment(x,y);
+    this.segments = [this.head];
     this.counter = x;
     this.speed = s;
-    this.movementX = false;
+    this.movementX = true;
+
   }
   changeDirection(arrow)
   {
@@ -43,7 +45,11 @@ class Snake
       this.counter += Math.abs(this.speed);
       if(this.counter % dimension == 0)
       {
-        this.head.x += dimension * Math.sign(this.speed);
+        this.head.update(this.head.x + dimension * Math.sign(this.speed), this.head.y);
+        for(let i = 1; i < this.segments.length; i++)
+        {
+          this.segments[i].update(this.segments[i - 1].oldX, this.segments[i - 1].oldY);
+        }
       }
 
     }
@@ -52,7 +58,11 @@ class Snake
       this.counter += Math.abs(this.speed);
       if(this.counter % dimension == 0)
       {
-        this.head.y += dimension * Math.sign(this.speed);
+        this.head.update(this.head.x, this.head.y + dimension * Math.sign(this.speed));
+        for(let i = 1; i < this.segments.length; i++)
+        {
+          this.segments[i].update(this.segments[i - 1].oldX, this.segments[i - 1].oldY);
+        }
       }
     }
     if(this.head.x > (width - dimension))
@@ -72,11 +82,23 @@ class Snake
       this.head.y = height - dimension;
     }
 
+
+
+  }
+
+  addSegment()
+  {
+    let last = this.segments[this.segments.length - 1];
+    let seg = new Segment(last.x - dimension,last.y);
+    this.segments.push(seg);
   }
 
   show()
   {
-    rect(this.head.x, this.head.y, dimension, dimension);
+    for(let i = 0; i < this.segments.length; i++)
+    {
+      this.segments[i].show();
+    }
   }
   stop()
   {
@@ -87,6 +109,7 @@ class Snake
     else {
       this.speed = s;
     }
+
 
   }
 }

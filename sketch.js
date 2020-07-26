@@ -1,15 +1,18 @@
-let s = 2;
-let dimension = 50;
+let s = 1;
+let dimension = 20;
 
-function setup() {
+function setup()
+{
 	createCanvas(400, 400);
 	snake = new Snake(width/2, height/2);
+	//noLoop();
 }
 
 function draw() {
 	background(51);
+		snake.show();
 	snake.update();
-	snake.show();
+
 
 }
 
@@ -20,4 +23,8 @@ function keyPressed() {
 		snake.stop();
 	}
   snake.changeDirection(keyCode);
+}
+
+function mouseClicked() {
+  snake.addSegment();
 }
