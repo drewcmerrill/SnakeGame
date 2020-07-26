@@ -3,10 +3,10 @@ class Snake
   constructor(x,y)
   {
     this.head = new Segment(x,y);
-    this.segments = [this.head, new Segment(width/2 - dimension,height/2), new Segment(100,100)];
+    this.segments = [this.head];
     this.counter = x;
     this.speed = s;
-    this.movementX = false;
+    this.movementX = true;
 
   }
   changeDirection(arrow)
@@ -46,6 +46,10 @@ class Snake
       if(this.counter % dimension == 0)
       {
         this.head.update(this.head.x + dimension * Math.sign(this.speed), this.head.y);
+        for(let i = 1; i < this.segments.length; i++)
+        {
+          this.segments[i].update(this.segments[i - 1].oldX, this.segments[i - 1].oldY);
+        }
       }
 
     }
@@ -55,6 +59,10 @@ class Snake
       if(this.counter % dimension == 0)
       {
         this.head.update(this.head.x, this.head.y + dimension * Math.sign(this.speed));
+        for(let i = 1; i < this.segments.length; i++)
+        {
+          this.segments[i].update(this.segments[i - 1].oldX, this.segments[i - 1].oldY);
+        }
       }
     }
     if(this.head.x > (width - dimension))
@@ -74,20 +82,23 @@ class Snake
       this.head.y = height - dimension;
     }
 
-    for(let i = 1; i < this.segments.length; i++)
-    {
-      this.segments[i].update(this.segments[i - 1].oldX, this.segments[i - 1].oldY);
-      this.segments[i].show();
-    }
 
+
+  }
+
+  addSegment()
+  {
+    let last = this.segments[this.segments.length - 1];
+    let seg = new Segment(last.x - dimension,last.y);
+    this.segments.push(seg);
   }
 
   show()
   {
-    push();
-    fill(255);
-    pop();
-    rect(this.head.x, this.head.y, dimension, dimension);
+    for(let i = 0; i < this.segments.length; i++)
+    {
+      this.segments[i].show();
+    }
   }
   stop()
   {
