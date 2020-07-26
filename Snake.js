@@ -7,33 +7,38 @@ class Snake
     this.counter = width/2;
     this.speed = s;
     this.movementX = true;
+    this.direction = createVector(1, 0);
 
   }
   changeDirection(arrow)
   {
-    if(arrow == LEFT_ARROW)
+    if(arrow == LEFT_ARROW && (!this.direction.equals(1, 0) || this.segments.length == 1))
     {
       console.log("left arrow");
       this.speed = -1 * s;
       this.movementX = true;
+      this.direction.set(-1, 0);
     }
-    else if(arrow == RIGHT_ARROW)
+    else if(arrow == RIGHT_ARROW && (!this.direction.equals(-1, 0) || this.segments.length == 1))
     {
       console.log("right arrow");
       this.speed = s;
       this.movementX = true;
+      this.direction.set(1, 0);
     }
-    else if(arrow == UP_ARROW)
+    else if(arrow == UP_ARROW && (!this.direction.equals(0, 1) || this.segments.length == 1))
     {
       console.log("up arrow");
       this.speed = -1 * s;
       this.movementX = false;
+      this.direction.set(0, -1);
     }
-    else if(arrow == DOWN_ARROW)
+    else if(arrow == DOWN_ARROW && (!this.direction.equals(0, -1) || this.segments.length == 1))
     {
       console.log("down arrow");
       this.speed = s;
       this.movementX = false;
+      this.direction.set(0, 1);
     }
 
   }
@@ -108,7 +113,7 @@ class Snake
   addSegment()
   {
     let last = this.segments[this.segments.length - 1];
-    let seg = new Segment(last.x - dimension,last.y, food.r, food.g, food.b);
+    let seg = new Segment(last.oldX ,last.oldY, food.r, food.g, food.b);
     this.segments.push(seg);
     food = new Food();
   }
