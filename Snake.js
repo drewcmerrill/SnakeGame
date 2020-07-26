@@ -1,10 +1,10 @@
 class Snake
 {
-  constructor(x,y)
+  constructor(speed)
   {
-    this.head = new Segment(x,y);
+    this.head = new Segment(width/2, height/2, random(255), random(255), random(255));
     this.segments = [this.head];
-    this.counter = x;
+    this.counter = width/2;
     this.speed = s;
     this.movementX = true;
 
@@ -40,9 +40,20 @@ class Snake
 
   eat()
   {
-    if(head.x == food.x && head.y == food.y)
+    if(this.head.x == food.x && this.head.y == food.y)
     {
+      this.addSegment();
+    }
+  }
 
+  collide()
+  {
+    for(let i = 1; i < this.segments.length; i++)
+    {
+      if(this.head.x == this.segments[i].x && this.head.y == this.segments[i].y)
+      {
+        this.die();
+      }
     }
   }
 
@@ -97,8 +108,9 @@ class Snake
   addSegment()
   {
     let last = this.segments[this.segments.length - 1];
-    let seg = new Segment(last.x - dimension,last.y);
+    let seg = new Segment(last.x - dimension,last.y, food.r, food.g, food.b);
     this.segments.push(seg);
+    food = new Food();
   }
 
   show()
@@ -117,7 +129,17 @@ class Snake
     else {
       this.speed = s;
     }
-
-
   }
+
+  die()
+  {
+    this.speed = 0;
+    for(let i = 0; i < this.segments.length; i++)
+    {
+      this.segments[i].r = 255;
+      this.segments[i].g = 0;
+      this.segments[i].b = 0;
+    }
+  }
+
 }
