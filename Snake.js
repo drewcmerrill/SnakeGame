@@ -115,7 +115,27 @@ class Snake
     let last = this.segments[this.segments.length - 1];
     let seg = new Segment(last.oldX ,last.oldY, food.r, food.g, food.b);
     this.segments.push(seg);
-    food = new Food();
+
+    let x = floor(random(width/dimension)) * dimension
+    let y = floor(random(height/dimension)) * dimension
+
+    let covered = true;
+    while(covered)
+    {
+      covered = false;
+      for(let i = 0; i < this.segments.length; i++)
+      {
+        if(x == this.segments[i].x && y == this.segments[i].y)
+        {
+          covered = true;
+          x = floor(random(width/dimension)) * dimension
+          y = floor(random(height/dimension)) * dimension
+          break;
+        }
+      }
+    }
+
+    food = new Food(x,y);
   }
 
   show()

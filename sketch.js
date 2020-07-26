@@ -3,11 +3,12 @@ let dimension;
 var food;
 function setup()
 {
-	createCanvas(600,600);
+	createCanvas(700,700);
 	dimension = width/10;
 	s = dimension/10;
 	snake = new Snake();
-	food = new Food();
+	food = new Food(floor(random(width/dimension)) * dimension, floor(random(height/dimension)) * dimension);
+
 
 
 }
