@@ -1,20 +1,18 @@
-let s = 1;
+let s = 2;
 let dimension = 20;
-var x = 0;
-var y = 0;
 var food;
 function setup()
 {
-	createCanvas(400, 400);
-	snake = new Snake(width/2, height/2);
-	x = floor(random(width/dimension)) * dimension;
-	y = floor(random(height/dimension)) * dimension;
-	food = new Food(x,y);
+	createCanvas(600, 600);
+	snake = new Snake();
+	food = new Food();
 
 }
 
 function draw() {
 	background(51);
+	snake.eat();
+	snake.collide();
 	food.show();
 	snake.show();
 	snake.update();
