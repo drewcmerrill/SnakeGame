@@ -3,9 +3,11 @@ class Snake
   constructor(x,y)
   {
     this.head = new Segment(x,y);
+    this.segments = [this.head, new Segment(width/2 - dimension,height/2), new Segment(100,100)];
     this.counter = x;
     this.speed = s;
     this.movementX = false;
+
   }
   changeDirection(arrow)
   {
@@ -43,7 +45,7 @@ class Snake
       this.counter += Math.abs(this.speed);
       if(this.counter % dimension == 0)
       {
-        this.head.x += dimension * Math.sign(this.speed);
+        this.head.update(this.head.x + dimension * Math.sign(this.speed), this.head.y);
       }
 
     }
@@ -52,7 +54,7 @@ class Snake
       this.counter += Math.abs(this.speed);
       if(this.counter % dimension == 0)
       {
-        this.head.y += dimension * Math.sign(this.speed);
+        this.head.update(this.head.x, this.head.y + dimension * Math.sign(this.speed));
       }
     }
     if(this.head.x > (width - dimension))
@@ -72,10 +74,19 @@ class Snake
       this.head.y = height - dimension;
     }
 
+    for(let i = 1; i < this.segments.length; i++)
+    {
+      this.segments[i].update(this.segments[i - 1].oldX, this.segments[i - 1].oldY);
+      this.segments[i].show();
+    }
+
   }
 
   show()
   {
+    push();
+    fill(255);
+    pop();
     rect(this.head.x, this.head.y, dimension, dimension);
   }
   stop()
@@ -87,6 +98,7 @@ class Snake
     else {
       this.speed = s;
     }
+
 
   }
 }

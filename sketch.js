@@ -1,15 +1,17 @@
-let s = 2;
-let dimension = 50;
+let s = .5;
+let dimension = 20;
 
-function setup() {
-	createCanvas(400, 400);
+function setup()
+{
+	createCanvas(500, 500);
 	snake = new Snake(width/2, height/2);
 }
 
 function draw() {
 	background(51);
+		snake.show();
 	snake.update();
-	snake.show();
+
 
 }
 
