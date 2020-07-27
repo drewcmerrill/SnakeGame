@@ -9,6 +9,7 @@ class Segment
     this.r = r;
     this.g = g;
     this.b = b;
+    this.mass = 10;
   }
 
   update(newX, newY)
