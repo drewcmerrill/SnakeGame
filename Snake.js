@@ -12,25 +12,25 @@ class Snake
   }
   changeDirection(arrow)
   {
-    if(arrow == LEFT_ARROW && (!this.direction.equals(1, 0) || this.segments.length == 1))
+    if((arrow == LEFT_ARROW || arrow == 65) && (!this.direction.equals(1, 0) || this.segments.length == 1))
     {
       this.speed = -1 * s;
       this.movementX = true;
       this.direction.set(-1, 0);
     }
-    else if(arrow == RIGHT_ARROW && (!this.direction.equals(-1, 0) || this.segments.length == 1))
+    else if((arrow == RIGHT_ARROW || arrow == 68) && (!this.direction.equals(-1, 0) || this.segments.length == 1))
     {
       this.speed = s;
       this.movementX = true;
       this.direction.set(1, 0);
     }
-    else if(arrow == UP_ARROW && (!this.direction.equals(0, 1) || this.segments.length == 1))
+    else if((arrow == UP_ARROW || arrow == 87) && (!this.direction.equals(0, 1) || this.segments.length == 1))
     {
       this.speed = -1 * s;
       this.movementX = false;
       this.direction.set(0, -1);
     }
-    else if(arrow == DOWN_ARROW && (!this.direction.equals(0, -1) || this.segments.length == 1))
+    else if((arrow == DOWN_ARROW || arrow == 83) && (!this.direction.equals(0, -1) || this.segments.length == 1))
     {
       this.speed = s;
       this.movementX = false;

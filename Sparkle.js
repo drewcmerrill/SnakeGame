@@ -104,7 +104,7 @@ class Sparkle
   show()
   {
     push();
-    fill(255,182,193);
+    fill(r, g, b);
     ellipse(this.pos.x, this.pos.y, this.r *2, this.r * 2);
     pop();
   }
