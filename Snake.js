@@ -2,40 +2,36 @@ class Snake
 {
   constructor(speed)
   {
-    this.head = new Segment(width/2, height/2, random(255), random(255), random(255));
+    this.head = new Segment(width/2, height/2, r, g, b);
+    this.updateGradient();
     this.segments = [this.head];
     this.counter = width/2;
     this.speed = s;
     this.movementX = true;
     this.direction = createVector(1, 0);
-
   }
   changeDirection(arrow)
   {
     if(arrow == LEFT_ARROW && (!this.direction.equals(1, 0) || this.segments.length == 1))
     {
-      console.log("left arrow");
       this.speed = -1 * s;
       this.movementX = true;
       this.direction.set(-1, 0);
     }
     else if(arrow == RIGHT_ARROW && (!this.direction.equals(-1, 0) || this.segments.length == 1))
     {
-      console.log("right arrow");
       this.speed = s;
       this.movementX = true;
       this.direction.set(1, 0);
     }
     else if(arrow == UP_ARROW && (!this.direction.equals(0, 1) || this.segments.length == 1))
     {
-      console.log("up arrow");
       this.speed = -1 * s;
       this.movementX = false;
       this.direction.set(0, -1);
     }
     else if(arrow == DOWN_ARROW && (!this.direction.equals(0, -1) || this.segments.length == 1))
     {
-      console.log("down arrow");
       this.speed = s;
       this.movementX = false;
       this.direction.set(0, 1);
@@ -105,15 +101,12 @@ class Snake
     {
       this.head.y = height - dimension;
     }
-
-
-
   }
 
   addSegment()
   {
     let last = this.segments[this.segments.length - 1];
-    let seg = new Segment(last.oldX ,last.oldY, food.r, food.g, food.b);
+    let seg = new Segment(last.oldX ,last.oldY, food.red, food.green, food.blue);
     this.segments.push(seg);
 
     let x = floor(random(width/dimension)) * dimension
@@ -134,8 +127,52 @@ class Snake
         }
       }
     }
-
+    this.updateGradient();
     food = new Food(x,y);
+
+  }
+
+  updateGradient()
+  {
+    r += random(gradient) * rDirection;
+    g += random(gradient) * gDirection;
+    b += random(gradient) * bDirection;
+    if(r > 255 || r < 0)
+    {
+      if(r > 255)
+      {
+        r = 255 - random(gradient);
+      }
+      if(r < 0)
+      {
+        r = 0 + random(gradient);
+      }
+      rDirection = rDirection * -1;
+    }
+    if(g > 255 || g < 0)
+    {
+      if(g > 255)
+      {
+        g = 255 - random(gradient);
+      }
+      if(g < 0)
+      {
+        g = 0 + random(gradient);
+      }
+      gDirection = gDirection * -1;
+    }
+    if(b > 255 || b < 0)
+    {
+      if(b > 255)
+      {
+        b = 255 - random(gradient);
+      }
+      if(b < 0)
+      {
+        b = 0 + random(gradient);
+      }
+      bDirection = bDirection * -1;
+    }
   }
 
   show()

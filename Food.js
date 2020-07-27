@@ -2,19 +2,17 @@ class Food
 {
   constructor(x, y)
   {
-    // this.x = floor(random(width/dimension)) * dimension;
-    // this.y = floor(random(height/dimension)) * dimension;
     this.x = x;
     this.y = y;
-    this.r = random(255);
-    this.g = random(255);
-    this.b = random(255);
+    this.red = r;
+    this.green = g;
+    this.blue = b;
   }
 
   show()
   {
     push();
-    fill(this.r, this.g, this.b);
+    fill(this.red, this.green, this.blue);
     rect(this.x, this.y, dimension, dimension);
     pop();
   }
