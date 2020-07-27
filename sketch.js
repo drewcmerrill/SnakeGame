@@ -26,6 +26,8 @@ function setup()
 		sparkles.push(new Sparkle(random(width), random(height), .11));
 
 	}
+
+
 }
 
 function draw() {
