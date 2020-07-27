@@ -105,6 +105,7 @@ class Snake
 
   addSegment()
   {
+    score++;
     let last = this.segments[this.segments.length - 1];
     let seg = new Segment(last.oldX ,last.oldY, food.red, food.green, food.blue);
     this.segments.push(seg);
@@ -202,6 +203,11 @@ class Snake
       this.segments[i].g = 0;
       this.segments[i].b = 0;
     }
+    push();
+    textSize(100);
+    fill(255);
+    text("YOU DIED", width/8 + 20, height/2);
+    pop();
   }
 
 }
