@@ -23,7 +23,7 @@ function setup()
 
 	for(let i = 0; i < width/2; i++)
 	{
-		sparkles.push(new Sparkle(random(width), random(height), .11));
+		sparkles.push(new Sparkle(random(width), random(height), .1));
 
 	}
 
